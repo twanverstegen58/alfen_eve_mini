@@ -1,82 +1,30 @@
 
-# Alfen Wallbox - HomeAssistant Integration
+# Alfen Eve Mini Wallbox - HomeAssistant Integration
 
-This is a custom component to allow control of Alfen Wallboxes in [HomeAssistant](https://home-assistant.io).
+This is a custom component to allow control of Alfen Eve Mini Wallboxes in [HomeAssistant](https://home-assistant.io).
 
-The component is a fork of the [Garo Wallbox custom integration](https://github.com/sockless-coding/garo_wallbox) and [egnerfl custom integration](https://github.com/egnerfl/alfen_wallbox)
-
-## Recent Improvements
-
-### Wallbox Crash Prevention (January 2026)
-
-**Configurable category fetching to prevent wallbox crashes:**
-- 🛡️ **Prevents watchdog resets** - Configurable settings to eliminate memory/CPU spikes that cause wallbox crashes
-- ⚡ **Configurable API load** - Adjust categories per cycle (1-15) and fetch delay (0-5s) if needed
-- 🔄 **Smart rotation** - When reduced, categories rotate across multiple cycles
-- ⚡ **Fast update cycles** - Default 20s interval with all categories fetched per cycle
-- ✨ **User commands unaffected** - Value updates and commands processed immediately
-- 📊 **Tunable settings** - Adjust via integration options if you experience instability
-
-**Benefits:** By default, all categories are fetched every cycle for maximum responsiveness. If you experience wallbox instability, you can reduce categories per cycle or add fetch delays via integration options.
-
-### Responsiveness Improvements (January 2026)
-
-**Better responsiveness and reduced API load:**
-- ⚡ **Forced refresh after value updates** - Changes now apply immediately instead of waiting for next cycle
-- ⚡ **Optimized default scan interval** - Default 20s for responsive updates (configurable 1-300s)
-- ⚡ **Smarter update scheduling** - Automatic immediate refresh when users change settings
-- 🔧 Users can configure different intervals via integration options if needed
-
-**Benefits:** User changes (like current limit adjustments) are now visible immediately. Lower API traffic means better stability and less interference with the wallbox's single-session limitation.
-
-### Performance Optimizations (January 2026)
-
-**Major performance and efficiency improvements:**
-- ⚡ Eliminated 60-second blocking on timeout - faster recovery from network issues
-- ⚡ Optimized property updates with dictionary comprehensions
-- ⚡ Improved log parsing using regex patterns (faster, less CPU)
-- ⚡ Limited log memory usage to prevent unbounded growth (deque with maxlen=500)
-- ⚡ Better error handling with timing metrics and detailed logging
-- ⚡ Reduced retry backoff from 5s to 2s for faster recovery
-
-**Benefits:** Lower memory usage, faster updates, better resilience, improved observability. See [CHANGELOG.md](CHANGELOG.md) for details.
-
-### Reliability Fixes (January 2026)
-
-**10 critical bug fixes for reliability:**
-- ✅ Fixed race conditions causing silent failures when setting values
-- ✅ Eliminated deadlocks from improper lock handling
-- ✅ Fixed bitwise OR bugs in validation logic (current limit, green share, comfort power)
-- ✅ Added automatic retry for failed updates
-- ✅ Improved error logging and visibility
-
-Previously, users experienced "silent failures" when changing settings (e.g., max current) - values wouldn't update and required manual retry. This has been resolved.
-
-> After reverse engineering the API myself I found out that there is already a Python libary wrapping the Alfen API.
-> https://gitlab.com/LordGaav/alfen-eve/-/tree/develop/alfeneve
-> 
-> https://github.com/leeyuentuen/alfen_wallbox/wiki/API-paramID
+The component is a fork of [Garo Wallbox custom integration](https://github.com/sockless-coding/garo_wallbox), [egnerfl custom integration](https://github.com/egnerfl/alfen_wallbox) and [leeyuentuen custom integration](https://github.com/leeyuentuen/alfen_wallbox)
 
 ## Installation
 
 ### Install using HACS (recommended)
 If you do not have HACS installed yet visit https://hacs.xyz for installation instructions.
 
-To add the this repository to HACS in your Home Assistant instance, use this My button:
+To add this repository to HACS in your Home Assistant instance, use this My button:
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=alfen_wallbox&owner=leeyuentuen&category=Integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=alfen_mini_wallbox&owner=twanverstegen58&category=Integration)
 
-After installation, please reboot and add Alfen Wallbox device to your Home Assistant instance, use this My button:
+After installation, please reboot and add the Alfen Eve Mini Wallbox device to your Home Assistant instance, use this My button:
 
-[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=alfen_wallbox)
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=alfen_mini_wallbox)
 
 <details>
 <summary><b><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m13.75 10.19l.63.13l4.17 2.08c.7.23 1.16.92 1.1 1.66v.26l-.9 6.12c-.06.43-.25.83-.6 1.11c-.31.3-.72.45-1.15.45h-6.88c-.49 0-.94-.18-1.27-.53L2.86 15.5l.9-1c.24-.25.62-.39.98-.37h.29L9 15V4.5a2 2 0 0 1 2-2a2 2 0 0 1 2 2v5.69z"></path></svg> Manual configuration steps</b></summary>
 
-> - In HACS, go to the Integrations section and add the custom repository via the 3 dot menu on the top right. Enter ```https://github.com/>> leeyuentuen/alfen_wallbox``` in the Repository field, choose the ```Integration``` category, then click add.
-Hit the big + at the bottom right and search for **Alfen Wallbox**. Click it, then click the download button.
-> - Clone or copy this repository and copy the folder 'custom_components/alfen_wallbox' into '<homeassistant config>/custom_components/alfen_wallbox'
-> - Once installed the Alfen Wallbox integration can be configured via the Home Assistant integration interface
+> - In HACS, go to the Integrations section and add the custom repository via the 3 dot menu on the top right. Enter ```https://github.com/>> twanverstegen58/alfen_mini_wallbox``` in the Repository field, choose the ```Integration``` category, then click add.
+Hit the big + at the bottom right and search for **Alfen Eve Mini Wallbox**. Click it, then click the download button.
+> - Clone or copy this repository and copy the folder 'custom_components/alfen_mini_wallbox' into '<homeassistant config>/custom_components/alfen_mini_wallbox'
+> - Once installed the Alfen Eve Mini Wallbox integration can be configured via the Home Assistant integration interface
 where you can enter the IP address of the device.
 </details>
 
@@ -122,7 +70,7 @@ Note; The name of the configured charging point is "wallbox" in these examples.
 
 ### - Changing Green Share %
 ```
-service: alfen_wallbox.set_green_share
+service: alfen_mini_wallbox.set_green_share
 data:
   entity_id: number.wallbox_solar_green_share
   value: 80
@@ -130,7 +78,7 @@ data:
 
 ### - Changing Comfort Charging Power in Watt
 ```
-service: alfen_wallbox.set_comfort_power
+service: alfen_mini_wallbox.set_comfort_power
 data:
   entity_id: number.wallbox_solar_comfort_level
   value: 1400
@@ -138,7 +86,7 @@ data:
 
 ### - Enable phase switching
 ```
-service: alfen_wallbox.enable_phase_switching
+service: alfen_mini_wallbox.enable_phase_switching
 data:
   entity_id: switch.wallbox_enable_phase_switching
 ```
@@ -146,30 +94,30 @@ data:
 
 ### - Disable phase switching
 ```
-service: alfen_wallbox.disable_phase_switching
+service: alfen_mini_wallbox.disable_phase_switching
 data:
   entity_id: switch.wallbox_enable_phase_switching
 ```
 
 ### - Enable RFID Authorization Mode
 ```
-service: alfen_wallbox.enable_rfid_authorization_mode
+service: alfen_mini_wallbox.enable_rfid_authorization_mode
 data:
   entity_id: select.wallbox_authorization_mode
 ```
 
 ### - Disable RFID Authorization Mode
 ```
-service: alfen_wallbox.disable_rfid_authorization_mode
+service: alfen_mini_wallbox.disable_rfid_authorization_mode
 data:
   entity_id: select.wallbox_authorization_mode
 ```
 
 ### - Reboot wallbox
 ```
-service: alfen_wallbox.reboot_wallbox
+service: alfen_mini_wallbox.reboot_wallbox
 data:
-  entity_id: alfen_wallbox.garage
+  entity_id: alfen_mini_wallbox.garage
 ```
 
 ## Development & Testing
@@ -190,7 +138,7 @@ pytest tests/
 
 **Run with coverage:**
 ```bash
-pytest tests/ --cov=custom_components.alfen_wallbox --cov-report=term-missing
+pytest tests/ --cov=custom_components.alfen_mini_wallbox --cov-report=term-missing
 ```
 
 **Run specific test file:**
@@ -202,7 +150,7 @@ pytest tests/test_config_flow.py -v
 
 **Type checking with mypy:**
 ```bash
-mypy custom_components/alfen_wallbox
+mypy custom_components/alfen_mini_wallbox
 ```
 
 **Linting with ruff:**
@@ -220,7 +168,7 @@ ruff format .
 **Run all checks:**
 ```bash
 # Full quality check
-pytest tests/ && mypy custom_components/alfen_wallbox && ruff check .
+pytest tests/ && mypy custom_components/alfen_mini_wallbox && ruff check .
 ```
 
 ### Test Structure

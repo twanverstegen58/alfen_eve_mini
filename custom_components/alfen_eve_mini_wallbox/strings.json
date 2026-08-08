@@ -2,7 +2,7 @@
     "config": {
         "step": {
             "user": {
-                "title": "Configure Alfen Wallbox",
+                "title": "Configure Alfen Eve Mini Wallbox",
                 "description": "Enter IP address and credentials of your Alfen Wallbox.",
                 "data": {
                     "host": "Host",
@@ -12,7 +12,7 @@
                 }
             },
             "reconfigure": {
-                "title": "Reconfigure Alfen Wallbox",
+                "title": "Reconfigure Alfen Eve Mini Wallbox",
                 "description": "Update connection settings for your Alfen Wallbox.",
                 "data": {
                     "host": "Host",
@@ -55,7 +55,7 @@
     "services": {
         "reboot_wallbox": {
             "name": "Reboot wallbox",
-            "description": "Reboots the Alfen wallbox.",
+            "description": "Reboots the Alfen Eve Mini wallbox.",
             "fields": {
                 "entity_id": {
                     "name": "Entity",
@@ -376,11 +376,11 @@
     "issues": {
         "connection_failed": {
             "title": "Connection to wallbox failed",
-            "description": "Unable to connect to the Alfen wallbox at {host}. Please check that the wallbox is powered on and accessible on the network."
+            "description": "Unable to connect to the Alfen Eve Mini wallbox at {host}. Please check that the wallbox is powered on and accessible on the network."
         },
         "authentication_failed": {
             "title": "Authentication failed",
-            "description": "Unable to authenticate with the Alfen wallbox. Please verify your username and password in the integration settings."
+            "description": "Unable to authenticate with the Alfen Eve Mini wallbox. Please verify your username and password in the integration settings."
         }
     }
 }

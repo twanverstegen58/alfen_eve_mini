@@ -4,8 +4,13 @@ DOMAIN = "alfen_wallbox"
 
 ID = "id"
 VALUE = "value"
-PROPERTIES = "properties"
+ACCESS = "access"
+TYPE = "type"
+LENGHT = "len"
 CAT = "cat"
+VERSION = "version"
+COUNT = "count"
+PROPERTIES = "properties"
 OFFSET = "offset"
 TOTAL = "total"
 
@@ -31,9 +36,8 @@ CAT_DISPLAY = "display"
 CAT_GENERIC = "generic"
 CAT_GENERIC2 = "generic2"
 CAT_MBUS_TCP = "MbusTCP"
+CAT_LEDS = "leds"
 CAT_METER1 = "meter1"
-CAT_METER2 = "meter2"
-CAT_METER4 = "meter4"
 CAT_OCPP = "ocpp"
 CAT_STATES = "states"
 CAT_TEMP = "temp"
@@ -52,10 +56,8 @@ DEFAULT_REFRESH_CATEGORIES = (
     CAT_DISPLAY,
     CAT_GENERIC,
     CAT_GENERIC2,
-    CAT_MBUS_TCP,
     CAT_METER1,
-    CAT_METER2,
-    CAT_METER4,
+    CAT_LEDS,
     CAT_OCPP,
     CAT_STATES,
     CAT_TEMP,
@@ -68,10 +70,8 @@ CATEGORIES = (
     CAT_DISPLAY,
     CAT_GENERIC,
     CAT_GENERIC2,
-    CAT_MBUS_TCP,
     CAT_METER1,
-    CAT_METER2,
-    CAT_METER4,
+    CAT_LEDS,
     CAT_OCPP,
     CAT_STATES,
     CAT_TEMP,

@@ -4,8 +4,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.alfen_wallbox.const import DOMAIN, ID, VALUE
-from custom_components.alfen_wallbox.sensor import (
+from custom_components.alfen_eve_mini_wallbox.const import DOMAIN, ID, VALUE
+from custom_components.alfen_eve_mini_wallbox.sensor import (
     ALFEN_SENSOR_TYPES,
     AlfenMainSensor,
     AlfenSensor,

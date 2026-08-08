@@ -31,7 +31,14 @@ from .const import (
     COMMAND_REBOOT,
     DEFAULT_TIMEOUT,
     DOMAIN,
-    ID,
+    ID,   
+    VALUE,
+    ACCESS,
+    TYPE,
+    LENGHT,
+    CAT,
+    VERSION,
+    COUNT,
     INFO,
     LICENSES,
     LOGIN,
@@ -87,6 +94,7 @@ class AlfenDevice:
         self.name = name
         # Create unique identifier for logging (e.g., "MyWallbox@192.168.1.100")
         self.log_id = f"{name}@{host}"
+        self.cookies = None
         self._session = session
         self.username = username
         self.category_options = category_options
@@ -131,6 +139,7 @@ class AlfenDevice:
     async def init(self) -> bool:
         """Initialize the Alfen API."""
         # Proactively login before first API call
+        _LOGGER.debug("[Alfen init] start")
         if not self.logged_in:
             _LOGGER.debug("[%s] Not logged in - logging in before init", self.log_id)
             await self.login()
@@ -142,6 +151,7 @@ class AlfenDevice:
         if not self.name and self.info:
             self.name = f"{self.info.identity} ({self.host})"
         self.id = f"alfen_{self.name}"
+        _LOGGER.debug("[Alfen init] end")
 
         return result
 
@@ -162,27 +172,65 @@ class AlfenDevice:
                     licenses.append(key)
         return licenses
 
+    async def get_generic_info(self) -> dict[str, Any]:
+        paramListDict = [
+            {
+                'paramName': 'OD_sysFirmwareVersion',
+                'paramId'  : '2054_0',
+                'infoName' : 'FWVersion'
+            },
+            {
+                'paramName': 'OD_sysChargePointModel',
+                'paramId'  : '2050_0',
+                'infoName' : 'Model'
+            },
+            {
+                'paramName': 'OD_ODversion',
+                'paramId'  : '2005_0',
+                'infoName' : 'ObjectId'
+            },
+            {
+                'paramName': 'OD_manufacturerDeviceName',
+                'paramId'  : '1008_0',
+                'infoName' : 'Type'
+            },
+        ]
+        generic_info = {
+            "Identity": self.host,
+            "FWVersion": "",
+            "Model": "",
+            "ObjectId": "",
+            "Type": "",
+        }
+
+        for param in paramListDict:
+            paramId = param['paramId']
+            paramName = param['paramName']
+            paramInfo = param['infoName']
+            paramGet = {'ids': paramId }
+            response = await self._session.get(url=self.__get_url(PROP), params = paramGet, ssl=self.ssl, cookies = self.cookies)
+            response.raise_for_status()
+            if response.status == 200:
+                response = await response.json(content_type=None)
+            _LOGGER.debug("[%s] Response %s", self.log_id, str(response))
+            del response[VERSION]
+            value = response[paramName]['value']
+            generic_info[paramInfo] = value
+        return generic_info
+
     async def get_info(self) -> bool:
         """Get info from the API."""
-        response = await self._session.get(url=self.__get_url(INFO), ssl=self.ssl)
+        response = await self._session.get(url=self.__get_url(INFO), ssl=self.ssl, cookies = self.cookies)
         _LOGGER.debug("[%s] Response %s", self.log_id, str(response))
 
         if response.status == 200:
             resp = await response.json(content_type=None)
             self.info = AlfenDeviceInfo(resp)
-
-            return True
-
-        _LOGGER.debug("[%s] Info API not available, use generic info", self.log_id)
-        generic_info = {
-            "Identity": self.host,
-            "FWVersion": "?",
-            "Model": "Generic Alfen Wallbox",
-            "ObjectId": "?",
-            "Type": "?",
-        }
-        self.info = AlfenDeviceInfo(generic_info)
-        return False
+        else:
+            _LOGGER.debug("[%s] Info API not available, use generic info", self.log_id)
+            generic_info = await self.get_generic_info()
+            self.info = AlfenDeviceInfo(generic_info)
+        return True
 
     @property
     def device_info(self) -> dict[str, Any]:
@@ -368,7 +416,17 @@ class AlfenDevice:
         )
 
         for idx, cat in enumerate(static_cats):
+            _LOGGER.debug(
+                "[%s] idx: %d cat: %s",
+                self.log_id,
+                idx, cat
+            )  
             props = await self._get_all_properties_value(cat)
+            _LOGGER.debug(
+                "[%s] type(props): %s",
+                self.log_id,
+                type(props),
+            )            
             static_properties.extend(props)
 
             # Add delay between static category fetches to reduce initial load
@@ -441,12 +499,18 @@ class AlfenDevice:
         # With rotation: preserve existing properties and only update newly fetched ones
         if not self.properties:
             # First run: initialize with static properties
-            self.properties = {str(prop[ID]): prop for prop in self.static_properties}
+            #self.properties = {str(prop[ID]): prop for prop in self.static_properties}
+            for prop in self.static_properties:
+                _LOGGER.debug("_build_properties_dict: type(prop): %s", type(prop))
+                for paramDict in prop.values():
+                    self.properties[str(paramDict[ID])] = paramDict
 
         # Update properties from the categories we just fetched (rotation or full)
         # This preserves properties from categories we didn't fetch this cycle
         for prop in dynamic_properties:
-            self.properties[str(prop[ID])] = prop
+            _LOGGER.debug("_build_properties_dict: type(prop): %s", type(prop))
+            for paramDict in prop.values():
+                self.properties[str(paramDict[ID])] = paramDict
 
     async def _fetch_logs_and_transactions(self) -> None:
         """Fetch logs and transactions according to their schedules."""
@@ -546,6 +610,7 @@ class AlfenDevice:
                         connector.limit,
                         connector.limit_per_host,
                     )
+                _LOGGER.debug("[Alfen Eve Mini] _post: %s", cmd)
 
                 async with self._session.post(
                     url=self.__get_url(cmd),
@@ -553,6 +618,7 @@ class AlfenDevice:
                     headers=POST_HEADER_JSON,
                     timeout=ClientTimeout(total=DEFAULT_TIMEOUT),
                     ssl=self.ssl,
+                    cookies = self.cookies
                 ) as response:
                     if response.status == 401 and allowed_login:
                         self.logged_in = False
@@ -647,8 +713,9 @@ class AlfenDevice:
                     )
 
                 async with self._session.get(
-                    url, timeout=ClientTimeout(total=DEFAULT_TIMEOUT), ssl=self.ssl
+                    url, timeout=ClientTimeout(total=DEFAULT_TIMEOUT), ssl=self.ssl, cookies = self.cookies
                 ) as response:
+                    _LOGGER.debug("returned from get")
                     if response.status == 401 and allowed_login:
                         self.logged_in = False
                         _LOGGER.warning(
@@ -657,12 +724,15 @@ class AlfenDevice:
                         )
                         needs_auth = True
                     else:
+                        _LOGGER.debug("returned from get: status: %d raise_for_status...",response.status)
                         response.raise_for_status()
+                        _LOGGER.debug("returned from get: after raise_for_status...")
                         # Process response inside context manager
                         if json_decode:
                             result = await response.json(content_type=None)
                         else:
                             result = await response.text()
+                            _LOGGER.debug("returned from get: %s", result)
                         return result
             except TimeoutError:
                 _LOGGER.warning("[%s] Timeout on GET", self.log_id)
@@ -799,22 +869,23 @@ class AlfenDevice:
             return False
 
         # Check required keys
-        if PROPERTIES not in response or TOTAL not in response:
+        if VERSION not in response or COUNT not in response:
             return False
 
-        # Validate PROPERTIES is a list
-        if not isinstance(response[PROPERTIES], list):
+        # Validate version, only version 1 supported
+        if response[VERSION] != 1:
             return False
-
-        # Validate TOTAL is an integer
-        if not isinstance(response[TOTAL], int):
-            return False
-
+        
+        # Remove VERSION and COUNT keys from response so to keep only the parameters keys and its attributes
+        del response[VERSION]
+        del response[COUNT]
         # Validate each property has required structure
-        for prop in response[PROPERTIES]:
+        keys_to_check = [ID, VALUE, ACCESS, TYPE, LENGHT, CAT]
+        for param, prop in response.items():
             if not isinstance(prop, dict):
                 return False
-            if ID not in prop:
+            keys_present = [key for key in keys_to_check if key in prop]
+            if keys_present != keys_to_check:
                 return False
 
         return True
@@ -886,6 +957,7 @@ class AlfenDevice:
                             _LOGGER.debug("[%s] Could not log response headers", self.log_id)
 
                         http_response.raise_for_status()
+                        self.cookies = http_response.cookies
                         try:
                             response = await http_response.json(content_type=None)
                         except Exception:
@@ -961,6 +1033,7 @@ class AlfenDevice:
 
         needs_auth = False
         async with self._lock:
+            _LOGGER.debug("[Alfen Eve Mini] _update_value PROP")
             try:
                 async with self._session.post(
                     url=self.__get_url(PROP),
@@ -968,6 +1041,7 @@ class AlfenDevice:
                     headers=POST_HEADER_JSON,
                     timeout=ClientTimeout(total=DEFAULT_TIMEOUT),
                     ssl=self.ssl,
+                    cookies=self.cookies
                 ) as response:
                     if response.status == 401 and allowed_login:
                         self.logged_in = False
@@ -1015,6 +1089,7 @@ class AlfenDevice:
         # Use urlencode for safe URL construction
         query = urlencode({ID: api_param})
         cmd = f"{PROP}?{query}"
+        _LOGGER.debug("[Alfen Eve Mini] _get_value: %s", cmd)
         response = await self._get(url=self.__get_url(cmd))
         # _LOGGER.debug("Status Response %s: %s", cmd, str(response))
 
@@ -1036,12 +1111,15 @@ class AlfenDevice:
             # Use urlencode for safe URL construction
             query = urlencode({CAT: category, OFFSET: offset})
             cmd = f"{PROP}?{query}"
+            _LOGGER.debug("[Alfen Eve Mini] _get_all_properties_value: %s", cmd)
             response = await self._get(url=self.__get_url(cmd))
 
             if response is not None:
+                _LOGGER.debug("[Alfen Eve Mini] response is not None")
                 attempt = 0
                 # if response is a string, convert it to json
                 if isinstance(response, str):
+                    _LOGGER.debug("[Alfen Eve Mini] response:  [%s]", response.text)
                     try:
                         response = json.loads(response)
                     except json.JSONDecodeError:
@@ -1052,6 +1130,7 @@ class AlfenDevice:
                         )
                         break
 
+                _LOGGER.debug("[Alfen Eve Mini] Validate response")
                 # Validate response structure using comprehensive validation
                 if not self._validate_properties_response(response):
                     _LOGGER.warning(
@@ -1061,10 +1140,13 @@ class AlfenDevice:
                     )
                     break
 
+                _LOGGER.debug("[Alfen Eve Mini] merge the properties")
+                _LOGGER.debug("_get_all_properties_value: response(response)... %s", response)
                 # merge the properties with response properties
-                properties.extend(response[PROPERTIES])
-                nextRequest = response[TOTAL] > (offset + len(response[PROPERTIES]))
-                offset += len(response[PROPERTIES])
+                properties.append(response)
+                nextRequest = False
+                offset = 0
+                break
             elif attempt >= 3:
                 # This only possible in case of series of timeouts or unknown exceptions in self._get()
                 # It's better to break completely, otherwise we can provide partial data in self.properties.
@@ -1132,6 +1214,7 @@ class AlfenDevice:
 
         # Use urlencode for safe URL construction
         query = urlencode({OFFSET: log_offset})
+        _LOGGER.debug("[Alfen Eve Mini] _fetch_log: %s", query)
         response = await self._get(
             url=self.__get_url(f"log?{query}"),
             json_decode=False,
@@ -1242,6 +1325,7 @@ class AlfenDevice:
 
             # Use urlencode for safe URL construction
             query = urlencode({OFFSET: offset})
+            _LOGGER.debug("[Alfen Eve Mini] _get_transaction: %s", query)
             response = await self._get(
                 url=self.__get_url(f"transactions?{query}"),
                 json_decode=False,
@@ -1351,7 +1435,7 @@ class AlfenDevice:
                         transactionLoop = False
                         break
                     else:
-                        # _LOGGER.debug("[%s] Unknown line: %s", self.log_id, str(line))
+                        #_LOGGER.debug("[%s] Unknown line: %s", self.log_id, str(line))
                         offset = offset + 1
                         unknownLine += 1
                         if unknownLine > 2:
@@ -1400,6 +1484,7 @@ class AlfenDevice:
 
     async def request(self, method: str, cmd: str, json_data: dict[str, Any] | None = None) -> Any:
         """Send a request to the API."""
+        _LOGGER.debug("[Alfen Eve Mini] request: %s", cmd)
         if method == METHOD_GET:
             response = await self._get(url=self.__get_url(cmd))
         else:  # METHOD_POST
@@ -1493,7 +1578,7 @@ class AlfenDevice:
 
     def __get_url(self, action) -> str:
         """Get the URL for the API."""
-        return f"https://{self.host}/api/{action}"
+        return f"http://{self.host}/api/{action}"
 
 
 class AlfenDeviceInfo:

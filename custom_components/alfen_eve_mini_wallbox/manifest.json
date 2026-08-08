@@ -1,0 +1,13 @@
+{
+    "domain": "alfen_mini_wallbox",
+    "name": "Alfen Eve Mini Wallbox",
+    "codeowners": ["@twanverstegen58"],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/twanverstegen58/alfen_mini_wallbox",
+    "integration_type": "hub",
+    "iot_class": "local_polling",
+    "issue_tracker": "https://github.com/twanverstegen58/alfen_mini_wallbox/issues",
+    "requirements": [],
+    "version": "0.0.1"
+}

@@ -13,7 +13,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_wallbox.const import (
+from custom_components.alfen_eve_mini_wallbox.const import (
     CONF_CATEGORIES_PER_CYCLE,
     CONF_CATEGORY_FETCH_DELAY,
     CONF_REFRESH_CATEGORIES,

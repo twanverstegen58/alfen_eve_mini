@@ -15,8 +15,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_wallbox import async_migrate_entity_entry
-from custom_components.alfen_wallbox.const import DOMAIN
+from custom_components.alfen_eve_mini_wallbox import async_migrate_entity_entry
+from custom_components.alfen_eve_mini_wallbox.const import DOMAIN
 
 
 async def test_setup_entry_success(
@@ -88,7 +88,7 @@ async def test_config_entry_migration_v1_to_v2(
     v1_entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.alfen_wallbox.coordinator.AlfenDevice", autospec=True
+        "custom_components.alfen_eve_mini_wallbox.coordinator.AlfenDevice", autospec=True
     ) as mock_device_class:
         mock_device = mock_device_class.return_value
         mock_device.init = AsyncMock(return_value=True)

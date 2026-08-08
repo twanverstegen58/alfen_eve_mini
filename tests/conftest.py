@@ -13,7 +13,7 @@ from homeassistant.const import (
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_wallbox.const import (
+from custom_components.alfen_eve_mini_wallbox.const import (
     CONF_REFRESH_CATEGORIES,
     DEFAULT_REFRESH_CATEGORIES,
     DEFAULT_SCAN_INTERVAL,
@@ -34,7 +34,7 @@ def auto_enable_custom_integrations(enable_custom_integrations):
 def mock_alfen_device_fixture():
     """Mock an AlfenDevice."""
     with patch(
-        "custom_components.alfen_wallbox.coordinator.AlfenDevice", autospec=True
+        "custom_components.alfen_eve_mini_wallbox.coordinator.AlfenDevice", autospec=True
     ) as mock_device_class:
         mock_device = mock_device_class.return_value
         mock_device.init = AsyncMock(return_value=True)
@@ -93,7 +93,7 @@ def mock_config_entry_fixture():
 def mock_setup_entry_fixture():
     """Mock setting up a config entry."""
     with patch(
-        "custom_components.alfen_wallbox.async_setup_entry", return_value=True
+        "custom_components.alfen_eve_mini_wallbox.async_setup_entry", return_value=True
     ) as mock_setup:
         yield mock_setup
 
@@ -101,7 +101,7 @@ def mock_setup_entry_fixture():
 @pytest.fixture(name="mock_aiohttp_session", autouse=True)
 def mock_aiohttp_session_fixture():
     """Mock aiohttp ClientSession."""
-    with patch("custom_components.alfen_wallbox.coordinator.ClientSession") as mock_session_class:
+    with patch("custom_components.alfen_eve_mini_wallbox.coordinator.ClientSession") as mock_session_class:
         session = MagicMock()
         session.closed = False
         session.close = AsyncMock()
@@ -126,7 +126,7 @@ def mock_aiohttp_session_fixture():
 @pytest.fixture(name="mock_tcp_connector", autouse=True)
 def mock_tcp_connector_fixture():
     """Mock aiohttp TCPConnector."""
-    with patch("custom_components.alfen_wallbox.coordinator.TCPConnector") as mock_connector:
+    with patch("custom_components.alfen_eve_mini_wallbox.coordinator.TCPConnector") as mock_connector:
         connector = MagicMock()
         mock_connector.return_value = connector
         yield connector
@@ -135,7 +135,7 @@ def mock_tcp_connector_fixture():
 @pytest.fixture(name="mock_ssl_context", autouse=True)
 def mock_ssl_context_fixture():
     """Mock SSL context."""
-    with patch("custom_components.alfen_wallbox.coordinator.get_default_context") as mock_ssl:
+    with patch("custom_components.alfen_eve_mini_wallbox.coordinator.get_default_context") as mock_ssl:
         context = MagicMock()
         mock_ssl.return_value = context
         yield context

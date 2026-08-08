@@ -10,7 +10,7 @@ from homeassistant.helpers.update_coordinator import UpdateFailed
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_wallbox.coordinator import AlfenCoordinator
+from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
 
 
 async def test_coordinator_successful_update(
@@ -80,7 +80,7 @@ async def test_coordinator_connection_error(
     mock_config_entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.alfen_wallbox.coordinator.AlfenDevice", autospec=True
+        "custom_components.alfen_eve_mini_wallbox.coordinator.AlfenDevice", autospec=True
     ) as mock_device_class:
         mock_device = mock_device_class.return_value
         mock_device.init = AsyncMock(side_effect=ClientConnectionError())
@@ -101,7 +101,7 @@ async def test_coordinator_async_connect_timeout(
     mock_config_entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.alfen_wallbox.coordinator.AlfenDevice", autospec=True
+        "custom_components.alfen_eve_mini_wallbox.coordinator.AlfenDevice", autospec=True
     ) as mock_device_class:
         mock_device = mock_device_class.return_value
         mock_device.log_id = "Test Wallbox@192.168.1.100"
@@ -157,7 +157,7 @@ async def test_coordinator_options_update_listener(
     """Test coordinator responds to options updates."""
     from homeassistant.const import CONF_SCAN_INTERVAL
 
-    from custom_components.alfen_wallbox.coordinator import options_update_listener
+    from custom_components.alfen_eve_mini_wallbox.coordinator import options_update_listener
 
     mock_config_entry.add_to_hass(hass)
 
@@ -189,7 +189,7 @@ async def test_coordinator_setup_creates_device(
     mock_config_entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.alfen_wallbox.coordinator.AlfenDevice", autospec=True
+        "custom_components.alfen_eve_mini_wallbox.coordinator.AlfenDevice", autospec=True
     ) as mock_device_class:
         mock_device = mock_device_class.return_value
         mock_device.init = AsyncMock(return_value=True)

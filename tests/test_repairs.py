@@ -1,6 +1,6 @@
 """Test the Alfen Wallbox repairs module."""
 
-from custom_components.alfen_wallbox.repairs import (
+from custom_components.alfen_eve_mini_wallbox.repairs import (
     AuthenticationFailedRepairFlow,
     ConnectionFailedRepairFlow,
     async_create_fix_flow,

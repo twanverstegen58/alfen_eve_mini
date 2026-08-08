@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from custom_components.alfen_wallbox.alfen import AlfenDevice
-from custom_components.alfen_wallbox.const import ID, PROPERTIES, TOTAL, VALUE
+from custom_components.alfen_eve_mini_wallbox.alfen import AlfenDevice
+from custom_components.alfen_eve_mini_wallbox.const import ID, PROPERTIES, TOTAL, VALUE
 
 
 @pytest.fixture(name="mock_session")

@@ -1,13 +1,13 @@
 {
-    "domain": "alfen_mini_wallbox",
+    "domain": "alfen_eve_mini",
     "name": "Alfen Eve Mini Wallbox",
     "codeowners": ["@twanverstegen58"],
     "config_flow": true,
     "dependencies": [],
-    "documentation": "https://github.com/twanverstegen58/alfen_mini_wallbox",
+    "documentation": "https://github.com/twanverstegen58/alfen_eve_mini",
     "integration_type": "hub",
     "iot_class": "local_polling",
-    "issue_tracker": "https://github.com/twanverstegen58/alfen_mini_wallbox/issues",
+    "issue_tracker": "https://github.com/twanverstegen58/alfen_eve_mini/issues",
     "requirements": [],
     "version": "0.0.1"
 }

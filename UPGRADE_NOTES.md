@@ -32,7 +32,7 @@ Add to your `configuration.yaml`:
 logger:
   default: info
   logs:
-    custom_components.alfen_wallbox: debug
+    custom_components.alfen_eve_mini: debug
 ```
 
 Then restart Home Assistant.
@@ -147,16 +147,16 @@ If you have custom modifications:
 
 ```bash
 # Syntax check
-python3 -m py_compile custom_components/alfen_wallbox/*.py
+python3 -m py_compile custom_components/alfen_eve_mini/*.py
 
 # Install in Home Assistant
-cp -r custom_components/alfen_wallbox ~/.homeassistant/custom_components/
+cp -r custom_components/alfen_eve_mini ~/.homeassistant/custom_components/
 
 # Restart Home Assistant
 ha core restart
 
 # Enable debug logging and monitor
-tail -f ~/.homeassistant/home-assistant.log | grep alfen_wallbox
+tail -f ~/.homeassistant/home-assistant.log | grep alfen_eve_mini
 ```
 
 ### Understanding the New Flow
@@ -208,18 +208,18 @@ If you experience issues and need to rollback:
 
 1. **Via git:**
    ```bash
-   cd custom_components/alfen_wallbox
+   cd custom_components/alfen_eve_mini
    git checkout <previous-commit-hash>
    ```
 
 2. **Via HACS:**
    - Go to HACS → Integrations
-   - Find Alfen Wallbox
+   - Find Alfen Eve Mini
    - Click → Redownload → Select previous version
 
 3. **Restart Home Assistant**
 
-**Please report issues** at: https://github.com/leeyuentuen/alfen_wallbox/issues
+**Please report issues** at: https://github.com/twanverstegen58/alfen_eve_mini/issues
 
 Include:
 - Home Assistant version
@@ -232,9 +232,9 @@ Include:
 ## Support
 
 - **Documentation:** [LOCKING_FIXES.md](LOCKING_FIXES.md) - Technical details
-- **Issues:** https://github.com/leeyuentuen/alfen_wallbox/issues
+- **Issues:** https://github.com/twanverstegen58/alfen_eve_mini/issues
 - **Discussions:** GitHub Discussions tab
-- **Home Assistant Community:** Search for "Alfen Wallbox"
+- **Home Assistant Community:** Search for "Alfen Eve Mini"
 
 ---
 

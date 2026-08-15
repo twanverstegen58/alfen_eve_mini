@@ -1,6 +1,6 @@
 """Constants for the Alfen Wallbox integration."""
 
-DOMAIN = "alfen_wallbox"
+DOMAIN = "alfen_eve_mini"
 
 ID = "id"
 VALUE = "value"

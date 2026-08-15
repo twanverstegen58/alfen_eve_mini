@@ -42,7 +42,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [lint.isort]
 force-sort-within-sections = true
-known-first-party = ["custom_components.alfen_wallbox"]
+known-first-party = ["custom_components.alfen_eve_mini"]
 combine-as-imports = true
 split-on-trailing-comma = false
 

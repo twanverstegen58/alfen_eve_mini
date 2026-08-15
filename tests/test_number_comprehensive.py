@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from custom_components.alfen_eve_mini_wallbox.const import DOMAIN, ID, LICENSE_HIGH_POWER, VALUE
-from custom_components.alfen_eve_mini_wallbox.number import (
+from custom_components.alfen_eve_mini.const import DOMAIN, ID, LICENSE_HIGH_POWER, VALUE
+from custom_components.alfen_eve_mini.number import (
     ALFEN_NUMBER_DUAL_SOCKET_TYPES,
     ALFEN_NUMBER_TYPES,
     AlfenNumber,

@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_eve_mini_wallbox.select import ALFEN_SELECT_TYPES, async_setup_entry
+from custom_components.alfen_eve_mini.select import ALFEN_SELECT_TYPES, async_setup_entry
 
 
 async def test_select_setup(
@@ -16,7 +16,7 @@ async def test_select_setup(
     """Test select platform setup with single socket."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -45,7 +45,7 @@ async def test_select_setup_dual_socket(
     """Test select platform setup with dual socket."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -73,8 +73,8 @@ async def test_select_async_select_option(
     """Test selecting an option."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -99,8 +99,8 @@ async def test_select_extra_state_attributes(
     """Test select extra state attributes."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -129,8 +129,8 @@ async def test_select_get_current_option_max_allowed_phase(
     """Test get current option for max_allowed_phase (special case)."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -161,8 +161,8 @@ async def test_select_async_update(
     """Test select async_update."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -190,8 +190,8 @@ async def test_select_async_set_current_phase(
     """Test set current phase service."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -219,8 +219,8 @@ async def test_select_async_enable_rfid_auth_mode(
     """Test enable RFID auth mode service."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -249,8 +249,8 @@ async def test_select_async_disable_rfid_auth_mode(
     """Test disable RFID auth mode service."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.select import AlfenSelect
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.select import AlfenSelect
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device

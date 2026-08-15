@@ -2,7 +2,7 @@
 
 from homeassistant.const import EntityCategory
 
-from custom_components.alfen_eve_mini_wallbox.binary_sensor import ALFEN_BINARY_SENSOR_TYPES
+from custom_components.alfen_eve_mini.binary_sensor import ALFEN_BINARY_SENSOR_TYPES
 
 
 class TestBinarySensorEntityCategories:

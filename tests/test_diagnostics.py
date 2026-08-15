@@ -2,7 +2,7 @@
 
 from unittest.mock import MagicMock
 
-from custom_components.alfen_eve_mini_wallbox.diagnostics import async_get_config_entry_diagnostics
+from custom_components.alfen_eve_mini.diagnostics import async_get_config_entry_diagnostics
 
 
 async def test_diagnostics(hass):

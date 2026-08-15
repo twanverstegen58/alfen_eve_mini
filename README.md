@@ -117,7 +117,7 @@ data:
 ```
 service: alfen_mini_wallbox.reboot_wallbox
 data:
-  entity_id: alfen_mini_wallbox.garage
+  entity_id: alfen_eve_mini.garage
 ```
 
 ## Development & Testing
@@ -138,7 +138,7 @@ pytest tests/
 
 **Run with coverage:**
 ```bash
-pytest tests/ --cov=custom_components.alfen_mini_wallbox --cov-report=term-missing
+pytest tests/ --cov=custom_components.alfen_eve_mini --cov-report=term-missing
 ```
 
 **Run specific test file:**
@@ -150,7 +150,7 @@ pytest tests/test_config_flow.py -v
 
 **Type checking with mypy:**
 ```bash
-mypy custom_components/alfen_mini_wallbox
+mypy custom_components/alfen_eve_mini
 ```
 
 **Linting with ruff:**
@@ -168,7 +168,7 @@ ruff format .
 **Run all checks:**
 ```bash
 # Full quality check
-pytest tests/ && mypy custom_components/alfen_mini_wallbox && ruff check .
+pytest tests/ && mypy custom_components/alfen_eve_mini && ruff check .
 ```
 
 ### Test Structure

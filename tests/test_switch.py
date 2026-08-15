@@ -3,7 +3,7 @@
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_eve_mini_wallbox.switch import ALFEN_SWITCH_TYPES, async_setup_entry
+from custom_components.alfen_eve_mini.switch import ALFEN_SWITCH_TYPES, async_setup_entry
 
 
 async def test_switch_setup(
@@ -14,7 +14,7 @@ async def test_switch_setup(
     """Test switch platform setup."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -41,8 +41,8 @@ async def test_switch_initialization(
     """Test switch entity initialization."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -63,8 +63,8 @@ async def test_switch_availability(
     """Test switch availability based on device properties."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -89,8 +89,8 @@ async def test_switch_is_on(
     """Test switch is_on property."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -123,8 +123,8 @@ async def test_switch_extra_state_attributes(
     """Test switch extra state attributes."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -153,8 +153,8 @@ async def test_switch_turn_on_normal(
     """Test normal switch turn on."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -177,8 +177,8 @@ async def test_switch_turn_on_active_load_balancing(
     """Test active load balancing switch turn on (special case)."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -203,8 +203,8 @@ async def test_switch_turn_off(
     """Test switch turn off."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -227,8 +227,8 @@ async def test_switch_enable_phase_switching(
     """Test enable phase switching service."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -253,8 +253,8 @@ async def test_switch_disable_phase_switching(
     """Test disable phase switching service."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.switch import AlfenSwitchSensor
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.switch import AlfenSwitchSensor
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device

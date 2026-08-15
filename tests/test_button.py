@@ -3,7 +3,7 @@
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_eve_mini_wallbox.button import ALFEN_BUTTON_TYPES, async_setup_entry
+from custom_components.alfen_eve_mini.button import ALFEN_BUTTON_TYPES, async_setup_entry
 
 
 async def test_button_setup(
@@ -14,7 +14,7 @@ async def test_button_setup(
     """Test button platform setup."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -45,8 +45,8 @@ async def test_button_initialization(
     """Test button entity initialization."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -67,8 +67,8 @@ async def test_force_update_button_press(
     """Test force update button press."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -100,8 +100,8 @@ async def test_login_button_press(
     """Test login button press."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -126,8 +126,8 @@ async def test_logout_button_press(
     """Test logout button press."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -152,8 +152,8 @@ async def test_reboot_button_press(
     """Test reboot button press."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -181,8 +181,8 @@ async def test_clear_transaction_button_press(
     """Test clear transaction button press."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.button import AlfenButton
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.button import AlfenButton
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device

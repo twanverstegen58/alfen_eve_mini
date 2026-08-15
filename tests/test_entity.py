@@ -4,8 +4,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.alfen_eve_mini_wallbox.const import DOMAIN
-from custom_components.alfen_eve_mini_wallbox.entity import AlfenEntity
+from custom_components.alfen_eve_mini.const import DOMAIN
+from custom_components.alfen_eve_mini.entity import AlfenEntity
 
 
 @pytest.fixture(name="mock_entry")

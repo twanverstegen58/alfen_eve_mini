@@ -6,10 +6,10 @@ The component is a fork of the [Alfen Wallbox custom integration](https://github
 
 ### Install using HACS (recommended)
 If you do not have HACS installed yet visit https://hacs.xyz for installation instructions.
-In HACS go to the Integrations section hit the big + at the bottom right and search for **Alfen Wallbox**.
+In HACS go to the Integrations section hit the big + at the bottom right and search for **Alfen Eve Mini**.
 
 ### Install manually
-Clone or copy this repository and copy the folder 'custom_components/alfen_wallbox' into '<homeassistant config>/custom_components/alfen_wallbox'
+Clone or copy this repository and copy the folder 'custom_components/alfen_eve_mini' into '<homeassistant config>/custom_components/alfen_eve_mini'
 
 ## Configuration
 

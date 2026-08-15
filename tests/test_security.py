@@ -5,14 +5,14 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.alfen_eve_mini_wallbox.alfen import (
+from custom_components.alfen_eve_mini.alfen import (
     API_PARAM_PATTERN,
     LOGIN_RATE_LIMIT_MAX_ATTEMPTS,
     LOGIN_RATE_LIMIT_WINDOW,
     AlfenDevice,
 )
-from custom_components.alfen_eve_mini_wallbox.const import ID, PROPERTIES, TOTAL, VALUE
-from custom_components.alfen_eve_mini_wallbox.diagnostics import (
+from custom_components.alfen_eve_mini.const import ID, PROPERTIES, TOTAL, VALUE
+from custom_components.alfen_eve_mini.diagnostics import (
     _hash_sensitive_value,
     _is_sensitive_property,
     _sanitize_latest_tag,

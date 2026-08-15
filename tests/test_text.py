@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.alfen_eve_mini_wallbox.text import ALFEN_TEXT_TYPES, async_setup_entry
+from custom_components.alfen_eve_mini.text import ALFEN_TEXT_TYPES, async_setup_entry
 
 
 async def test_text_setup(
@@ -16,7 +16,7 @@ async def test_text_setup(
     """Test text platform setup."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -43,8 +43,8 @@ async def test_text_initialization(
     """Test text entity initialization."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.text import AlfenText
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.text import AlfenText
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -69,8 +69,8 @@ async def test_text_get_current_value(
     """Test text entity get current value."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.text import AlfenText
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.text import AlfenText
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -95,8 +95,8 @@ async def test_text_async_set_value(
     """Test text entity set value."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.text import AlfenText
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.text import AlfenText
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -129,8 +129,8 @@ async def test_text_extra_state_attributes(
     """Test text entity extra state attributes."""
     mock_config_entry.add_to_hass(hass)
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.text import AlfenText
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.text import AlfenText
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device
@@ -161,8 +161,8 @@ async def test_text_password_mode(
 
     from homeassistant.components.text import TextMode
 
-    from custom_components.alfen_eve_mini_wallbox.coordinator import AlfenCoordinator
-    from custom_components.alfen_eve_mini_wallbox.text import AlfenText
+    from custom_components.alfen_eve_mini.coordinator import AlfenCoordinator
+    from custom_components.alfen_eve_mini.text import AlfenText
 
     coordinator = AlfenCoordinator(hass, mock_config_entry)
     coordinator.device = mock_alfen_device

@@ -1,9 +1,12 @@
 
 # Alfen Eve Mini - HomeAssistant Integration
 
-This is a custom component to allow control of Alfen Eve Mini wallboxes in [HomeAssistant](https://home-assistant.io).
+This is a custom component to allow control of Alfen Eve Mini wallboxes in [HomeAssistant](https://home-assistant.io).<br>
+> **Note:**
+This integration is intended only for the Alfen Eve Mini model. Use the alfen_wallbox integration for all other Alfen wallbox models.
 
 The component is a fork of [Garo Wallbox custom integration](https://github.com/sockless-coding/garo_wallbox), [egnerfl custom integration](https://github.com/egnerfl/alfen_wallbox) and [leeyuentuen custom integration](https://github.com/leeyuentuen/alfen_wallbox)
+
 
 ## Installation
 
@@ -18,15 +21,13 @@ After installation, please reboot and add the Alfen Eve Mini wallbox device to y
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=alfen_eve_mini)
 
-<details>
-<summary><b><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m13.75 10.19l.63.13l4.17 2.08c.7.23 1.16.92 1.1 1.66v.26l-.9 6.12c-.06.43-.25.83-.6 1.11c-.31.3-.72.45-1.15.45h-6.88c-.49 0-.94-.18-1.27-.53L2.86 15.5l.9-1c.24-.25.62-.39.98-.37h.29L9 15V4.5a2 2 0 0 1 2-2a2 2 0 0 1 2 2v5.69z"></path></svg> Manual configuration steps</b></summary>
+#### Manual configuration steps</b>
 
-> - In HACS, go to the Integrations section and add the custom repository via the 3 dot menu on the top right. Enter ```https://github.com/twanverstegen58/alfen_eve_mini``` in the Repository field, choose the ```Integration``` category, then click add.
+- In HACS, go to the Integrations section and add the custom repository via the 3 dot menu on the top right. Enter *https://github.com/twanverstegen58/alfen_eve_mini* in the Repository field, choose the *Integration* category, then click add.
 Hit the big + at the bottom right and search for **Alfen Eve Mini** wallbox. Click it, then click the download button.
-> - Clone or copy this repository and copy the folder 'custom_components/alfen_eve_mini' into '<homeassistant config>/custom_components/alfen_eve_mini'
-> - Once installed the Alfen Eve Mini Wallbox integration can be configured via the Home Assistant integration interface
+ - Clone or copy this repository and copy the folder ``'custom_components/alfen_eve_mini'`` into ``'<homeassistant config>/custom_components/alfen_eve_mini'``
+ - Once installed the Alfen Eve Mini Wallbox integration can be configured via the Home Assistant integration interface
 where you can enter the IP address of the device.
-</details>
 
 ### Home Assistant Energy Dashboard
 The wallbox can be added to the Home Assistant Energy Dashboard using the `_meter_reading` sensor.
@@ -181,11 +182,12 @@ pytest tests/ && mypy custom_components/alfen_eve_mini && ruff check .
 All tests use mocked device communication to avoid requiring a physical wallbox.
 
 ## Screenshots
-![Screenshot 1](./doc/screenshots/wallbox-1.png)
- - screenshot 1.
 
-![Screenshot 2](./doc/screenshots/wallbox-2.png)
- - screenshot 2.
+![Screenshot 1](./doc/screenshots/wallbox-1.png)<br>
+*Screenshot 1.*
+
+![Screenshot 2](./doc/screenshots/wallbox-2.png)<br>
+*Screenshot 2.*
  
-![Screenshot 3](./doc/screenshots/wallbox-3.png)
- - screenshot 3.
+![Screenshot 3](./doc/screenshots/wallbox-3.png)<br>
+*Screenshot 3.*

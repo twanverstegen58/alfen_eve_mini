@@ -1,6 +1,6 @@
 {
     "domain": "alfen_eve_mini",
-    "name": "Alfen Eve Mini Wallbox",
+    "name": "Alfen Eve Mini",
     "codeowners": ["@twanverstegen58"],
     "config_flow": true,
     "dependencies": [],

@@ -26,7 +26,7 @@ After installation, please reboot and add the Alfen Eve Mini wallbox device to y
 - In HACS, go to the Integrations section and add the custom repository via the 3 dot menu on the top right. Enter *https://github.com/twanverstegen58/alfen_eve_mini* in the Repository field, choose the *Integration* category, then click add.
 Hit the big + at the bottom right and search for **Alfen Eve Mini** wallbox. Click it, then click the download button.
  - Clone or copy this repository and copy the folder ``'custom_components/alfen_eve_mini'`` into ``'<homeassistant config>/custom_components/alfen_eve_mini'``
- - Once installed the Alfen Eve Mini Wallbox integration can be configured via the Home Assistant integration interface
+ - Once installed the Alfen Eve Mini integration can be configured via the Home Assistant integration interface
 where you can enter the IP address of the device.
 
 ### Home Assistant Energy Dashboard
@@ -35,7 +35,7 @@ The wallbox can be added to the Home Assistant Energy Dashboard using the `_mete
 ## Settings
 The wallbox can be configured using the Integrations settings menu:
 
-<img src="doc/screenshots/configure.png" alt="drawing" style="width:600px;"/>
+<img src="doc/screenshots/configure.png" alt="drawing" style="width:600px;">
 
 ### Configuration Options
 
@@ -51,7 +51,7 @@ Categories that are not selected will only load when the integration starts. The
 
 To locate a category, start by selecting all categories. Allow the integration to load, then find the desired entity. The category will be displayed in the entity's attributes.
 
-<img src="doc/screenshots/attribute category.png" alt="drawing" style="width:400px;"/>
+<img src="doc/screenshots/attribute category.png" alt="drawing" style="width:400px;">
 
 **Note:** If you reduce the categories per cycle below the total enabled categories, reducing the number of selected categories will enhance update frequency (fewer categories means faster rotation). The scan interval, categories per cycle, and fetch delay can all be adjusted via integration options to find the best balance for your wallbox.
 

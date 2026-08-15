@@ -5,14 +5,11 @@ All `GET` requests will deliver content with the content type `{'content-type': 
 
 For `POST` requests you have to use `{'content-type': 'application/json'}`.
 
-Before each request you have to login first and logout afterwards. The sessions are managed by the wallbox and you don't need to set a session token or something similar, I guess the wallbox uses the IP adress to authenticate the requests.
+Before each request you have to login first and logout afterwards. The sessions are managed by the wallbox and you need to set a session token (cookie), this is not required for more recent Alfen wallboxes. Furthermore the Alfen Eve Mini does not support the secure version of the standard web data transfer protocol (HTTPS).
 
-The info API doesn't need authentication / a login request.
-
-The wallbox uses an invalid self signed certificate, you need to disable all SSL checks to perform the API calls.
 
 ## Login
-`HTTP POST https://<HOST_IP>/api/login`
+`HTTP POST http://<HOST_IP>/api/login`
 ```
 {
     "username": "admin",
@@ -21,26 +18,27 @@ The wallbox uses an invalid self signed certificate, you need to disable all SSL
 ```
 
 ## Logout
-`HTTP POST https://<HOST_IP>/api/logout`
+`HTTP POST http://<HOST_IP>/api/logout`
 
 
 ## Info
-`HTTP GET https://<HOST_IP>/api/info`
+`HTTP GET http://<HOST_IP>/api/info`
+>**Note:** The 'info' command is not supported by the Alfen Eve Mini
 
 ## Restart
-`HTTP POST https://<HOST_IP>/api/cmd`
+`HTTP POST http://<HOST_IP>/api/cmd`
 ```
 {"command":"reboot"}
 ```
 
 ## Log
-`HTTP GET https://<HOST_IP>/api/log?offset=<OFFSET>`
+`HTTP GET http://<HOST_IP>/api/log?offset=<OFFSET>`
 
 >Default offset (256)
 
 # Props (POST)
 
-`HTTP POST https://<HOST_IP>/api/prop`
+`HTTP POST htt://<HOST_IP>/api/prop`
 
 Sample Request
 ```
@@ -53,7 +51,7 @@ Sample Request
 ```
 
 # Props (GET)
-`HTTP GET https://<HOST_IP>/api/prop?ids=<PROP_CODES>`
+`HTTP GET http://<HOST_IP>/api/prop?ids=<PROP_CODES>`
 
 Sample Response
 ```
@@ -170,7 +168,7 @@ Sample Response
 |10|Vehicle connected, start (Charging stopped)|
 |11|Normal Charging|
 # Firmware
-`HTTP GET https://<HOST_IP>/api/firmware`
+`HTTP GET http://<HOST_IP>/api/firmware`
 
 Sample response
 ```
